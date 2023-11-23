@@ -153,7 +153,7 @@ function ProductForm() {
                             <img src={item?.pic[0]} alt="Product Image" className="w-52 h-32 mx-auto mb-4   group-hover:shadow-lg"/>
                             <h2 className="text-xl font-semibold">{item?.name}</h2>
                             <p className="text-gray-600"> ${item?.price}</p>
-                           { localStorage.getItem("role").includes("admin")&&  <button onClick={(e)=>handleDelete(item?._id)} className='text-red-600 bg-blue-600 px-4 py-2 rounded-md'> delete </button>}
+                             <button onClick={(e)=>handleDelete(item?._id)} className='text-red-600 bg-blue-600 px-4 py-2 rounded-md'> delete </button> 
                         </div>
                     </div>
                 </div>)

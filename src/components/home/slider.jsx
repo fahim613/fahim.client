@@ -88,7 +88,7 @@ const Slider = () => {
                       src:"/21.jpg"
                     }
                   ].map((item,index)=>  
-                  <Link href={item?.link} className="text-white"><img src={item.src} key={index} className='w-full h-48  overflow-x-hidden rounded-md py-[.5px]'/></Link>
+                  <Link href={item?.link} className="text-white"><img src={item.src} key={index} className='w-full h-48  overflow-x-hidden rounded-md py-[.5px] transition-transform transform hover:scale-105'/></Link>
                   )
                       }
                     </div>

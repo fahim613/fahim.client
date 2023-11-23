@@ -4,11 +4,13 @@ import axios from '../../../components/axios/axios';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
- 
+import { useRouter } from 'next/navigation';
+
 const ProductDetails = () => {
  const [result,setResult] = useState([])
  const [toggle,setToggle] = useState(false)
  const params = useParams()
+ const router = useRouter()
  useEffect(()=>{
   try {
     
@@ -38,6 +40,10 @@ const [formData, setFormData] = useState({
     e.preventDefault();
     
 //     // Send the registration data to the server using POST method.
+if(!localStorage.getItem("token")){
+   router.push("/login")
+}
+else{
     try { 
         console.log(formData)
       const response = await  axios.post("/order",{...formData,price:result?.price, pname:result.name,id:result.id,pic:result.pic[0]})
@@ -49,7 +55,7 @@ const [formData, setFormData] = useState({
       
     } catch (error) {
       console.error('Error:', error);
-    }
+    }}
   };
   const [cookies,setCookie,removeCookie] = useCookies(["token"])
   const [token,setToken] = useState("")
@@ -75,9 +81,9 @@ const [formData, setFormData] = useState({
             </div>
            
             <div className="flex items-center space-x-2 mx-10">
-               { !token&&<Link href="/login" className="text-black">Login</Link>}
-               { token&&<Link href="/dashboard/product" className="text-black">Dashboard</Link>}
-               { token&&<button  onClick={logOut} className="text-black">Logout</button>}
+               { !localStorage.getItem("role")&&<Link href="/login" className="text-black">Login</Link>}
+             
+               { localStorage.getItem("role")&&<button  onClick={logOut} className="text-black">Logout</button>}
             </div>
         </div>
     </nav>
